@@ -10,6 +10,7 @@ import { displayOffer } from './display-offers.js';
 
 const PREVIOUS_PAGE_VALUE = '__PREVIOUS_PAGE__';
 const NEXT_PAGE_VALUE = '__NEXT_PAGE__';
+const QUIT_VALUE = '__QUIT__';
 
 type SelectionResult =
   | {
@@ -18,7 +19,7 @@ type SelectionResult =
       offerName: string;
     }
   | {
-      type: 'previous' | 'next';
+      type: 'previous' | 'next' | 'quit';
     };
 
 export async function selectOfferOrNavigate(
@@ -52,6 +53,12 @@ export async function selectOfferOrNavigate(
     });
   }
 
+  // Add "Quit" option at the end
+  choices.push({
+    message: '❌ Quit',
+    name: QUIT_VALUE,
+  });
+
   const response = await enquirer.prompt<{ selection: string }>({
     type: 'select',
     name: 'selection',
@@ -65,6 +72,10 @@ export async function selectOfferOrNavigate(
 
   if (response.selection === NEXT_PAGE_VALUE) {
     return { type: 'next' };
+  }
+
+  if (response.selection === QUIT_VALUE) {
+    return { type: 'quit' };
   }
 
   const selectedOffer = hits.find(hit => hit.objectID === response.selection)!;

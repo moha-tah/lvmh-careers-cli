@@ -34,6 +34,9 @@ export async function navigateOffers(
       page--;
     } else if (selection.type === 'next') {
       page++;
+    } else if (selection.type === 'quit') {
+      console.log('\n' + chalk.green('✓ Goodbye!'));
+      process.exit(0);
     } else if (selection.type === 'offer') {
       const answer = await enquirer.prompt<{ toggle: boolean }>({
         type: 'toggle',

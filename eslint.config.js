@@ -13,6 +13,7 @@ export default [
       globals: {
         fetch: 'readonly',
         console: 'readonly',
+        process: 'readonly',
       },
       parserOptions: {
         ecmaVersion: 'latest',
