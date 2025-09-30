@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { jest } from '@jest/globals';
-import { navigateLocalOffers } from './offer-navigation.js';
+
 import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
+import { navigateLocalOffers } from './offer-navigation.js';
 
 // Mock modules
 jest.mock('../../utils/offers-from-file.js', () => ({
@@ -15,10 +17,11 @@ jest.mock('./offer-selection.js', () => ({
 }));
 jest.mock('enquirer');
 
+import enquirer from 'enquirer';
+
 import { getOffersFromFile } from '../../utils/offers-from-file.js';
 import { displayOffers, displayResultsCount } from './display-offers.js';
 import { selectOfferOrNavigate } from './offer-selection.js';
-import enquirer from 'enquirer';
 
 const mockGetOffersFromFile = getOffersFromFile as jest.MockedFunction<
   typeof getOffersFromFile

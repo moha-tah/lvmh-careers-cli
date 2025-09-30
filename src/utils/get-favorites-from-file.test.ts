@@ -1,7 +1,8 @@
 import { jest } from '@jest/globals';
-import { getFavoritesFromFile } from './get-favorites-from-file.js';
+
 import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
 import { SavedQueryDTO } from '../api/dtos/saved-query.dto.js';
+import { getFavoritesFromFile } from './get-favorites-from-file.js';
 
 // Mock modules
 jest.mock('fs');
@@ -15,6 +16,7 @@ jest.mock('./get-config-dir.js', () => ({
 }));
 
 import { existsSync, readFileSync } from 'fs';
+
 import { config } from '../config/index.js';
 
 const mockExistsSync = existsSync as jest.MockedFunction<typeof existsSync>;

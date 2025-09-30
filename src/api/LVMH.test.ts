@@ -1,7 +1,7 @@
-import { LVMH } from './LVMH.js';
 import { LVMH_API_URL } from '../utils/constants.js';
 import { OfferQueryDTO } from './dtos/inputs/offer-query.dto.js';
 import { SearchOfferResultsDTO } from './dtos/outputs/search-offer-results.dto.js';
+import { LVMH } from './LVMH.js';
 
 describe('LVMH API', () => {
   let lvmhApi: LVMH;

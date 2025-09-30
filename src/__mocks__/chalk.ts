@@ -1,4 +1,4 @@
-// Mock for chalk
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 const chalk = {
   yellow: (str: string) => str,
   green: (str: string) => str,

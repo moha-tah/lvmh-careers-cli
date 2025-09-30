@@ -1,4 +1,5 @@
 import { jest } from '@jest/globals';
+
 import { isConfigValid } from './is-config-valid.function.js';
 
 // Mock config module

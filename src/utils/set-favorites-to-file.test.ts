@@ -1,7 +1,8 @@
 import { jest } from '@jest/globals';
-import { setFavoritesToFile } from './set-favorites-to-file.js';
+
 import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
 import { SavedQueryDTO } from '../api/dtos/saved-query.dto.js';
+import { setFavoritesToFile } from './set-favorites-to-file.js';
 
 // Mock modules
 jest.mock('fs');
@@ -15,6 +16,7 @@ jest.mock('./get-config-dir.js', () => ({
 }));
 
 import { writeFileSync } from 'fs';
+
 import { config } from '../config/index.js';
 
 const mockWriteFileSync = writeFileSync as jest.MockedFunction<
