@@ -23,6 +23,8 @@ export const searchCommand = new Command()
     const lvmhApi = new LVMH(locale);
     let query = command.query;
 
+    let page = 0;
+
     if (!query) {
       query = (
         await enquirer.prompt<{ query: string }>({
@@ -42,12 +44,13 @@ export const searchCommand = new Command()
         params: {
           query,
           hitsPerPage: command.number || config.get('hitsPerPage'),
-          page: 0,
+          page,
           facetFilters: [],
         },
       });
 
       const hits = results.results?.[0]?.hits || [];
+      const nbPages = results.results?.[0]?.nbPages || 0;
 
       if (command.raw) {
         console.log(JSON.stringify(hits, null, 2));
@@ -58,14 +61,6 @@ export const searchCommand = new Command()
         console.log('No results found.\n');
         return;
       }
-
-      console.log(
-        chalk
-          .hex(PRIMARY_COLOR)
-          .bold(
-            `✨ Found ${hits.length} result${hits.length > 1 ? 's' : ''}:\n`
-          )
-      );
 
       hits.forEach((hit, index) => {
         console.log(
@@ -85,6 +80,12 @@ export const searchCommand = new Command()
         );
         console.log();
       });
+      console.log(`📄 Page ${page + 1} of ${nbPages + 1}\n`);
+      console.log(
+        chalk
+          .hex(PRIMARY_COLOR)
+          .bold(`✨ Found ${hits.length} result${hits.length > 1 ? 's' : ''}`)
+      );
     } catch (error) {
       console.error('Error searching for offers:', error);
     }
