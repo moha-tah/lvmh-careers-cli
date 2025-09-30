@@ -2,7 +2,7 @@ import { Command } from 'commander';
 
 import { config } from '../config/index.js';
 import { displayLogo } from '../utils/logo.js';
-import { navigateOffers } from '../utils/offer-navigation.js';
+import { navigateLocalOffers } from '../utils/offer-navigation.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const favOffersCommand = new Command()
@@ -23,7 +23,7 @@ export const favOffersCommand = new Command()
         return;
       }
 
-      await navigateOffers(favoriteOffers, config.get('hitsPerPage'));
+      await navigateLocalOffers(favoriteOffers, 5);
     } catch (error) {
       console.error('Error loading favorite offers:', error);
     }

@@ -1,7 +1,7 @@
 export interface OfferHitDTO {
   objectID: string;
   name: string;
-  publicationTimestamp: number;
+  isNew: boolean;
 
   maison: string;
   city?: string;

@@ -5,18 +5,17 @@ import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
 import { displayOffers, displayResultsCount } from './display-offers.js';
 import { selectOfferOrNavigate } from './offer-selection.js';
 
-export async function navigateOffers(
-  allHits: OfferHitDTO[],
-  hitsPerPage: number
-): Promise<void> {
+type OfferProvider = (page: number) => Promise<{
+  hits: OfferHitDTO[];
+  nbPages: number;
+}>;
+
+async function handleOfferNavigation(provider: OfferProvider): Promise<void> {
   let page = 0;
-  const nbPages = Math.ceil(allHits.length / hitsPerPage) - 1;
   let continueNavigation = true;
 
   while (continueNavigation) {
-    const startIndex = page * hitsPerPage;
-    const endIndex = startIndex + hitsPerPage;
-    const hits = allHits.slice(startIndex, endIndex);
+    const { hits, nbPages } = await provider(page);
 
     if (hits.length === 0) {
       console.log('No results found.\n');
@@ -53,4 +52,25 @@ export async function navigateOffers(
       }
     }
   }
+}
+
+export async function navigateLocalOffers(
+  allHits: OfferHitDTO[],
+  hitsPerPage: number
+): Promise<void> {
+  const nbPages = Math.ceil(allHits.length / hitsPerPage) - 1;
+
+  await handleOfferNavigation(async page => {
+    const startIndex = page * hitsPerPage;
+    const endIndex = startIndex + hitsPerPage;
+    const hits = allHits.slice(startIndex, endIndex);
+
+    return { hits, nbPages };
+  });
+}
+
+export async function navigateRemoteOffers(
+  provider: OfferProvider
+): Promise<void> {
+  await handleOfferNavigation(provider);
 }

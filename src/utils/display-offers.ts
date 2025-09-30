@@ -4,7 +4,11 @@ import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
 import { PRIMARY_COLOR } from './constants.js';
 
 export function displayOffer(hit: OfferHitDTO, prefix = ''): void {
-  console.log(prefix + chalk.white.bold(hit.name));
+  console.log(
+    prefix +
+      chalk.white.bold(hit.name) +
+      (hit.isNew ? chalk.hex(PRIMARY_COLOR).bold(' (✨ New)') : '')
+  );
   console.log(prefix + chalk.gray('🏢 Company: ') + chalk.cyan(hit.maison));
   console.log(
     prefix +
