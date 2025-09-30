@@ -27,10 +27,6 @@ export function displayOffers(hits: OfferHitDTO[]): void {
   });
 }
 
-export function displayPageInfo(page: number, nbPages: number): void {
-  console.log(`📄 Page ${page + 1} of ${nbPages + 1}\n`);
-}
-
 export function displayResultsCount(count: number): void {
   console.log(
     chalk

@@ -2,7 +2,12 @@
 
 import { Command } from 'commander';
 
-import { clearCommand, initCommand, searchCommand } from './commands/index.js';
+import {
+  clearCommand,
+  favOffersCommand,
+  initCommand,
+  searchCommand,
+} from './commands/index.js';
 
 const program = new Command();
 
@@ -13,6 +18,7 @@ program
 
 program.addCommand(initCommand);
 program.addCommand(searchCommand);
+program.addCommand(favOffersCommand);
 program.addCommand(clearCommand);
 
 program.parse();

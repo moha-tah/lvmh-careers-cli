@@ -3,13 +3,8 @@ import enquirer from 'enquirer';
 
 import { LVMH } from '../api/LVMH.js';
 import { config } from '../config/index.js';
-import {
-  displayOffers,
-  displayPageInfo,
-  displayResultsCount,
-} from '../utils/display-offers.js';
 import { displayLogo } from '../utils/logo.js';
-import { selectOfferOrNavigate } from '../utils/offer-selection.js';
+import { navigateOffers } from '../utils/offer-navigation.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const searchCommand = new Command()
@@ -27,8 +22,6 @@ export const searchCommand = new Command()
     const lvmhApi = new LVMH(locale);
     let query = command.query;
 
-    let page = 0;
-
     if (!query) {
       query = (
         await enquirer.prompt<{ query: string }>({
@@ -44,55 +37,29 @@ export const searchCommand = new Command()
     }
 
     try {
-      let continueNavigation = true;
+      const results = await lvmhApi.searchOffers({
+        params: {
+          query,
+          hitsPerPage: 1000,
+          page: 0,
+          facetFilters: [],
+        },
+      });
 
-      while (continueNavigation) {
-        const results = await lvmhApi.searchOffers({
-          params: {
-            query,
-            hitsPerPage: command.number || config.get('hitsPerPage'),
-            page,
-            facetFilters: [],
-          },
-        });
+      const hits = results.results?.[0]?.hits || [];
 
-        const hits = results.results?.[0]?.hits || [];
-        const nbPages = results.results?.[0]?.nbPages || 0;
-
-        if (command.raw) {
-          console.log(JSON.stringify(hits, null, 2));
-          return;
-        }
-
-        if (hits.length === 0) {
-          console.log('No results found.\n');
-          return;
-        }
-
-        displayOffers(hits);
-        displayPageInfo(page, nbPages);
-        displayResultsCount(hits.length);
-
-        console.log();
-
-        const selection = await selectOfferOrNavigate(hits, page, nbPages);
-
-        if (selection.type === 'previous') {
-          page--;
-        } else if (selection.type === 'next') {
-          page++;
-        } else if (selection.type === 'offer') {
-          const answer = await enquirer.prompt<{ yes: boolean }>({
-            type: 'confirm',
-            name: 'yes',
-            message: 'Do you want to search for another offer?',
-          });
-
-          if (!answer.yes) {
-            continueNavigation = false;
-          }
-        }
+      if (command.raw) {
+        console.log(JSON.stringify(hits, null, 2));
+        return;
       }
+
+      if (hits.length === 0) {
+        console.log('No results found.\n');
+        return;
+      }
+
+      const hitsPerPage = command.number || config.get('hitsPerPage');
+      await navigateOffers(hits, hitsPerPage);
     } catch (error) {
       console.error('Error searching for offers:', error);
     }
