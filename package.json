@@ -12,6 +12,8 @@
     "build": "tsc",
     "dev": "tsx src/index.ts",
     "start": "node dist/index.js",
+    "test": "echo \"No tests yet\"",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"src/**/*.ts\"",
