@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import enquirer from 'enquirer';
 
-import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
+import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
 import { displayOffers, displayResultsCount } from './display-offers.js';
 import { selectOfferOrNavigate } from './offer-selection.js';
 

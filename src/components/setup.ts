@@ -1,8 +1,12 @@
+import chalk from 'chalk';
 import enquirer from 'enquirer';
 
 import { config } from '../config/index.js';
-import { AVAILABLE_LOCALES } from '../utils/constants.js';
-import { displayLogo } from '../utils/logo.js';
+import {
+  AVAILABLE_LOCALES,
+  AVAILABLE_STORAGE_TYPES,
+} from '../utils/constants.js';
+import { displayLogo } from './logo.js';
 
 export async function runSetup(): Promise<void> {
   displayLogo();
@@ -14,13 +18,30 @@ export async function runSetup(): Promise<void> {
     })
   );
 
-  const response = await enquirer.prompt<{ locale: string }>({
+  const localeResponse = await enquirer.prompt<{ locale: string }>({
     type: 'select',
     name: 'locale',
     message: 'Select your search language:',
     choices: localeChoices,
   });
 
-  config.set('locale', response.locale as keyof typeof AVAILABLE_LOCALES);
-  console.log('\n✓ Configuration saved successfully!\n');
+  config.set('locale', localeResponse.locale as keyof typeof AVAILABLE_LOCALES);
+
+  const storageTypeChoices = Object.entries(AVAILABLE_STORAGE_TYPES).map(
+    ([value, label]) => ({
+      name: value,
+      message: label,
+    })
+  );
+
+  const storageTypeResponse = await enquirer.prompt<{ storageType: string }>({
+    type: 'select',
+    name: 'storageType',
+    message: 'Select your storage type for offers and queries:',
+    choices: storageTypeChoices,
+  });
+
+  config.set('storageType', storageTypeResponse.storageType as 'json' | 'xml');
+
+  console.log(chalk.green('\n✓ Configuration saved successfully!\n'));
 }

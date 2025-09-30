@@ -1,8 +1,8 @@
 import { Command } from 'commander';
 
+import { displayLogo } from '../components/logo.js';
+import { navigateLocalOffers } from '../components/offers/offer-navigation.js';
 import { config } from '../config/index.js';
-import { displayLogo } from '../utils/logo.js';
-import { navigateLocalOffers } from '../utils/offer-navigation.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const favOffersCommand = new Command()

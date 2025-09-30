@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
 import { CLI_NAME, PRIMARY_COLOR } from '../utils/constants.js';
-import { displayLogo } from '../utils/logo.js';
+import { displayLogo } from './logo.js';
 
 export function showBaseUI(): void {
   displayLogo();

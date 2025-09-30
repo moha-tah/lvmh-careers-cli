@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import { PRIMARY_COLOR } from './constants.js';
+import { PRIMARY_COLOR } from '../utils/constants.js';
 
 export function displayLogo(): void {
   console.log(

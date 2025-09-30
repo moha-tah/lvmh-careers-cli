@@ -7,6 +7,7 @@ import {
 export type ConfigSchema = {
   locale: keyof typeof AVAILABLE_LOCALES;
   hitsPerPage: number;
+  storageType: 'json' | 'xml';
   favoriteOffers: OfferHitDTO[];
 };
 
@@ -22,5 +23,10 @@ export const configSchema = {
   favoriteOffers: {
     type: 'array',
     default: [],
+  },
+  storageType: {
+    type: 'string',
+    enum: ['json', 'xml'],
+    default: 'json',
   },
 } as const;

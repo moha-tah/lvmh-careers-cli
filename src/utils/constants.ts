@@ -13,3 +13,8 @@ export const AVAILABLE_LOCALES = {
   'fr-fr': 'Français',
   'en-us': 'English',
 };
+
+export const AVAILABLE_STORAGE_TYPES = {
+  json: 'JSON {}',
+  xml: 'XML </>',
+};

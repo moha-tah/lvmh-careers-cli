@@ -3,9 +3,9 @@ import { Command } from 'commander';
 import enquirer from 'enquirer';
 
 import { LVMH } from '../api/LVMH.js';
+import { displayLogo } from '../components/logo.js';
+import { navigateRemoteOffers } from '../components/offers/offer-navigation.js';
 import { config } from '../config/index.js';
-import { displayLogo } from '../utils/logo.js';
-import { navigateRemoteOffers } from '../utils/offer-navigation.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const searchCommand = new Command()

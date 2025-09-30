@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
-import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
-import { PRIMARY_COLOR } from './constants.js';
+import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
+import { PRIMARY_COLOR } from '../../utils/constants.js';
 
 export function displayOffer(hit: OfferHitDTO, prefix = ''): void {
   console.log(

@@ -3,9 +3,9 @@ import clipboardy from 'clipboardy';
 import enquirer from 'enquirer';
 import open from 'open';
 
-import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
-import { config } from '../config/index.js';
-import { LVMH_OFFER_BASE_URL } from './constants.js';
+import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
+import { config } from '../../config/index.js';
+import { LVMH_OFFER_BASE_URL } from '../../utils/constants.js';
 import { displayOffer } from './display-offers.js';
 
 const PREVIOUS_PAGE_VALUE = '__PREVIOUS_PAGE__';
