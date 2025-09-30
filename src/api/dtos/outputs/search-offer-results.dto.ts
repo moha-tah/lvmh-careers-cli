@@ -5,5 +5,6 @@ export interface SearchOfferResultsDTO {
     hits: OfferHitDTO[];
     nbHits: number;
     nbPages: number;
+    page: number;
   }[];
 }

@@ -1,6 +1,15 @@
-.history/
+# Node
 node_modules/
 dist/
 
-# cURL responses for testing
+# VSCode Extension
+.history/
+
+# Jest Coverage
+coverage/
+
+# cURL Responses for testing
 **/*.test.json
+
+# MacOS Specific
+**/.DS_Store
