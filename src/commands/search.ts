@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { Command } from 'commander';
 import enquirer from 'enquirer';
 
@@ -75,6 +76,10 @@ export const searchCommand = new Command()
         return { hits, nbPages };
       });
     } catch (error) {
+      if (!error) {
+        console.error(chalk.yellow('Interrupted. Goodbye!'));
+        return;
+      }
       console.error('Error searching for offers:', error);
     }
   });
