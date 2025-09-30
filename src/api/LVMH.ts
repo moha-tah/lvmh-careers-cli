@@ -1,8 +1,4 @@
-import {
-  AVAILABLE_LOCALES,
-  LVMH_API_BASE_INDEX_NAME,
-  LVMH_API_URL,
-} from '../utils/constants.js';
+import { LVMH_API_BASE_INDEX_NAME, LVMH_API_URL } from '../utils/constants.js';
 import { IndexName, Locale } from '../utils/types.js';
 import { OfferPayloadDTO } from './dtos/inputs/offer-payload.dto.js';
 import {

@@ -17,7 +17,7 @@ export interface FullOfferQueryDTO {
   };
 }
 
-export type OfferQueryDTO = Omit<
-  FullOfferQueryDTO,
-  'indexName' | 'params.filters'
->;
+// No need to specify indexName and filters since it's always the same
+export type OfferQueryDTO = {
+  params: Omit<FullOfferQueryDTO['params'], 'filters'>;
+};
