@@ -5,27 +5,34 @@ import { LVMH } from '../api/LVMH.js';
 import { config } from '../config/index.js';
 import { ensureConfigIsValid } from './init.js';
 
-export const queryCommand = new Command()
-  .name('query')
+export const searchCommand = new Command()
+  .name('search')
   .description('Search for job offers on LVMH Careers')
-  .action(async () => {
+  .option('-q, --query <query>', 'Query term')
+  .action(async command => {
     await ensureConfigIsValid();
 
     const locale = config.get('locale');
     const lvmhApi = new LVMH(locale);
+    let query = command.query;
 
-    const { searchTerm } = await enquirer.prompt<{ searchTerm: string }>({
-      type: 'input',
-      name: 'searchTerm',
-      message: 'Enter your search term:',
-    });
+    if (!query) {
+      query = (
+        await enquirer.prompt<{ query: string }>({
+          type: 'input',
+          name: 'query',
+          message: 'Enter your search term (leave empty to see all offers):',
+          initial: 'software engineer',
+        })
+      ).query;
+    }
 
     console.log('\n🔍 Searching for job offers...\n');
 
     try {
       const results = await lvmhApi.searchOffers({
         params: {
-          query: searchTerm,
+          query,
           hitsPerPage: 10,
           page: 0,
           facetFilters: [],
@@ -39,14 +46,16 @@ export const queryCommand = new Command()
         return;
       }
 
-      console.log(`Found ${hits.length} results:\n`);
+      console.log(
+        `Found ${hits.length} result${hits.length > 1 ? 's' : ''}:\n`
+      );
 
       hits.forEach((hit, index) => {
         console.log(`${index + 1}. ${hit.name}`);
         console.log(`   Company: ${hit.maison}`);
         console.log(`   Location: ${hit.city}, ${hit.country}`);
         console.log(`   Function: ${hit.function}`);
-        console.log(`   Contract: ${hit.contract}\n`);
+        console.log(`   Contract type: ${hit.contract}\n`);
       });
     } catch (error) {
       console.error('Error searching for offers:', error);

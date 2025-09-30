@@ -7,6 +7,6 @@ export const LVMH_OFFER_BASE_URL =
   'https://www.lvmh.com/join-us/our-job-offers/';
 
 export const AVAILABLE_LOCALES = {
-  'fr-fr': 'FR',
-  'en-us': 'EN',
+  'fr-fr': 'Français',
+  'en-us': 'English',
 };

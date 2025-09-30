@@ -1,2 +1,3 @@
+export { clearCommand } from './clear.js';
 export { initCommand } from './init.js';
-export { queryCommand } from './query.js';
+export { searchCommand } from './search.js';

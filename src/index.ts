@@ -2,8 +2,7 @@
 
 import { Command } from 'commander';
 
-import { initCommand, queryCommand } from './commands/index.js';
-import { showBaseUI } from './components/base-command.js';
+import { clearCommand, initCommand, searchCommand } from './commands/index.js';
 
 const program = new Command();
 
@@ -12,11 +11,8 @@ program
   .description('A CLI tool for LVMH Careers platform')
   .version('1.0.0');
 
-program.action(() => {
-  showBaseUI();
-});
-
 program.addCommand(initCommand);
-program.addCommand(queryCommand);
+program.addCommand(searchCommand);
+program.addCommand(clearCommand);
 
 program.parse();
