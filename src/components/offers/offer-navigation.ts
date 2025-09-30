@@ -61,7 +61,7 @@ async function handleOfferNavigation(
 
 export async function navigateLocalOffers(hitsPerPage: number): Promise<void> {
   await handleOfferNavigation('fav', async page => {
-    const allHits = getFavoritesFromFile();
+    const allHits = getFavoritesFromFile('offers');
     const nbPages = Math.ceil(allHits.length / hitsPerPage) - 1;
 
     const startIndex = page * hitsPerPage;

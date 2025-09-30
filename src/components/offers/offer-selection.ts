@@ -144,7 +144,7 @@ async function showOfferActions(
 }
 
 function toggleFavorite(offer: OfferHitDTO): void {
-  const favoriteOffers = getFavoritesFromFile();
+  const favoriteOffers = getFavoritesFromFile('offers');
 
   const existingIndex = favoriteOffers.findIndex(
     fav => fav.objectID === offer.objectID
@@ -158,18 +158,18 @@ function toggleFavorite(offer: OfferHitDTO): void {
   // Add to favorites
   favoriteOffers.push(offer);
 
-  const { path } = setFavoritesToFile(favoriteOffers);
+  const { path } = setFavoritesToFile(favoriteOffers, 'offers');
 
   console.log(chalk.green('✓ Offer added to favorites! Saved to: ' + path));
 }
 
 function removeFavorite(offer: OfferHitDTO): void {
-  const favoriteOffers = getFavoritesFromFile();
+  const favoriteOffers = getFavoritesFromFile('offers');
   const existingIndex = favoriteOffers.findIndex(
     fav => fav.objectID === offer.objectID
   );
   favoriteOffers.splice(existingIndex, 1);
-  const { path } = setFavoritesToFile(favoriteOffers);
+  const { path } = setFavoritesToFile(favoriteOffers, 'offers');
 
   console.log(
     chalk.green('✓ Offer removed from favorites! Saved to: ' + path + '\n')

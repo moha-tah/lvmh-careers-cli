@@ -46,12 +46,16 @@ export async function runSetup(): Promise<void> {
   config.set('storageType', storageTypeResponse.storageType as 'json' | 'xml');
 
   // Delete old favorite offers file (old format)
-  rmSync(
-    getConfigDir() + '/favorite-offers.' + storageTypeResponse.storageType ===
-      'xml'
-      ? 'json'
-      : 'xml',
-    { force: true } // Don't throw an error if the file doesn't exist
+  ['offers', 'queries'].forEach(type =>
+    rmSync(
+      getConfigDir() +
+        `/favorite-${type}.` +
+        storageTypeResponse.storageType ===
+        'xml'
+        ? 'json'
+        : 'xml',
+      { force: true } // Don't throw an error if the file doesn't exist
+    )
   );
 
   console.log(chalk.green('\n✓ Configuration saved successfully!\n'));

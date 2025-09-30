@@ -4,10 +4,11 @@ import { existsSync, readFileSync } from 'fs';
 import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
 import { config } from '../config/index.js';
 import { getConfigDir } from './get-config-dir.js';
+import { FavoriteType } from './types.js';
 
-export function getFavoritesFromFile(): OfferHitDTO[] {
+export function getFavoritesFromFile(type: FavoriteType): OfferHitDTO[] {
   const storageType = config.get('storageType');
-  const filePath = getConfigDir() + '/favorite-offers.' + storageType;
+  const filePath = getConfigDir() + `/favorite-${type}.` + storageType;
 
   // Return empty array if file doesn't exist
   if (!existsSync(filePath)) {

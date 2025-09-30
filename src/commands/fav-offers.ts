@@ -7,7 +7,7 @@ import { getFavoritesFromFile } from '../utils/get-favorites-from-file.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const favOffersCommand = new Command()
-  .name('fav-offers')
+  .name('offers')
   .description('View your favorite job offers')
   .action(async () => {
     await ensureConfigIsValid();
@@ -17,7 +17,7 @@ export const favOffersCommand = new Command()
     console.log('\n⭐ Your favorite offers...\n');
 
     try {
-      const favoriteOffers = getFavoritesFromFile();
+      const favoriteOffers = getFavoritesFromFile('offers');
       console.log(favoriteOffers);
 
       if (favoriteOffers.length === 0) {

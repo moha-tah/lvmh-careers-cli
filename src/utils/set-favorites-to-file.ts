@@ -4,12 +4,16 @@ import { writeFileSync } from 'fs';
 import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
 import { config } from '../config/index.js';
 import { getConfigDir } from './get-config-dir.js';
+import { FavoriteType } from './types.js';
 
-export function setFavoritesToFile(favoriteOffers: OfferHitDTO[]): {
+export function setFavoritesToFile(
+  favoriteOffers: OfferHitDTO[],
+  type: FavoriteType
+): {
   path: string;
 } {
   const storageType = config.get('storageType');
-  const path = getConfigDir() + '/favorite-offers.' + storageType;
+  const path = getConfigDir() + `/favorite-${type}.` + storageType;
 
   const data = { data: favoriteOffers };
 
