@@ -18,3 +18,4 @@ export const AVAILABLE_STORAGE_TYPES = {
   json: 'JSON {}',
   xml: 'XML </>',
 };
+

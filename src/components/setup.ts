@@ -1,11 +1,13 @@
 import chalk from 'chalk';
 import enquirer from 'enquirer';
+import { rmSync } from 'fs';
 
 import { config } from '../config/index.js';
 import {
   AVAILABLE_LOCALES,
   AVAILABLE_STORAGE_TYPES,
 } from '../utils/constants.js';
+import { getConfigDir } from '../utils/get-config-dir.js';
 import { displayLogo } from './logo.js';
 
 export async function runSetup(): Promise<void> {
@@ -42,6 +44,15 @@ export async function runSetup(): Promise<void> {
   });
 
   config.set('storageType', storageTypeResponse.storageType as 'json' | 'xml');
+
+  // Delete old favorite offers file (old format)
+  rmSync(
+    getConfigDir() + '/favorite-offers.' + storageTypeResponse.storageType ===
+      'xml'
+      ? 'json'
+      : 'xml',
+    { force: true } // Don't throw an error if the file doesn't exist
+  );
 
   console.log(chalk.green('\n✓ Configuration saved successfully!\n'));
 }

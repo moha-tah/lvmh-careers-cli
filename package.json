@@ -39,6 +39,7 @@
     "conf": "^15.0.0",
     "enquirer": "^2.4.1",
     "fast-xml-parser": "^5.2.5",
+    "fs": "^0.0.1-security",
     "open": "^10.2.0",
     "typescript": "^5.9.2"
   },

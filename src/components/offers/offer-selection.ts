@@ -4,8 +4,10 @@ import enquirer from 'enquirer';
 import open from 'open';
 
 import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
-import { config } from '../../config/index.js';
 import { LVMH_OFFER_BASE_URL } from '../../utils/constants.js';
+import { getFavoritesFromFile } from '../../utils/get-favorites-from-file.js';
+import { setFavoritesToFile } from '../../utils/set-favorites-to-file.js';
+import { OfferSourceType } from '../../utils/types.js';
 import { displayOffer } from './display-offers.js';
 
 const PREVIOUS_PAGE_VALUE = '__PREVIOUS_PAGE__';
@@ -25,7 +27,8 @@ type SelectionResult =
 export async function selectOfferOrNavigate(
   hits: OfferHitDTO[],
   page: number,
-  nbPages: number
+  nbPages: number,
+  source: OfferSourceType
 ): Promise<SelectionResult> {
   const choices: { message: string; name: string }[] = [];
 
@@ -82,11 +85,11 @@ export async function selectOfferOrNavigate(
 
   // Display selected offer
   console.log('\n' + chalk.bold('Selected offer:'));
-  displayOffer(selectedOffer);
+  displayOffer(selectedOffer, '   ', source);
   console.log();
 
   // Show action menu
-  await showOfferActions(selectedOffer);
+  await showOfferActions(selectedOffer, source);
 
   return {
     type: 'offer',
@@ -95,18 +98,28 @@ export async function selectOfferOrNavigate(
   };
 }
 
-async function showOfferActions(offer: OfferHitDTO): Promise<void> {
+async function showOfferActions(
+  offer: OfferHitDTO,
+  source: OfferSourceType
+): Promise<void> {
   const offerUrl = LVMH_OFFER_BASE_URL + offer.objectID;
+
+  const choices = [
+    { message: '📋 Copy offer link', name: 'copy' },
+    { message: '🌐 Open in browser', name: 'open' },
+  ];
+  if (source === 'search') {
+    choices.push({ message: '⭐ Add to favorites', name: 'favorite' });
+  }
+  if (source === 'fav') {
+    choices.push({ message: '🗑️  Remove from favorites', name: 'remove' });
+  }
 
   const actionResponse = await enquirer.prompt<{ action: string }>({
     type: 'select',
     name: 'action',
     message: 'What would you like to do?',
-    choices: [
-      { message: '📋 Copy offer link', name: 'copy' },
-      { message: '🌐 Open in browser', name: 'open' },
-      { message: '⭐ Add to favorites', name: 'favorite' },
-    ],
+    choices,
   });
 
   switch (actionResponse.action) {
@@ -123,11 +136,16 @@ async function showOfferActions(offer: OfferHitDTO): Promise<void> {
     case 'favorite':
       toggleFavorite(offer);
       break;
+
+    case 'remove':
+      removeFavorite(offer);
+      break;
   }
 }
 
 function toggleFavorite(offer: OfferHitDTO): void {
-  const favoriteOffers = config.get('favoriteOffers') || [];
+  const favoriteOffers = getFavoritesFromFile();
+
   const existingIndex = favoriteOffers.findIndex(
     fav => fav.objectID === offer.objectID
   );
@@ -139,7 +157,21 @@ function toggleFavorite(offer: OfferHitDTO): void {
 
   // Add to favorites
   favoriteOffers.push(offer);
-  config.set('favoriteOffers', favoriteOffers);
 
-  console.log(chalk.green('✓ Offer added to favorites!'));
+  const { path } = setFavoritesToFile(favoriteOffers);
+
+  console.log(chalk.green('✓ Offer added to favorites! Saved to: ' + path));
+}
+
+function removeFavorite(offer: OfferHitDTO): void {
+  const favoriteOffers = getFavoritesFromFile();
+  const existingIndex = favoriteOffers.findIndex(
+    fav => fav.objectID === offer.objectID
+  );
+  favoriteOffers.splice(existingIndex, 1);
+  const { path } = setFavoritesToFile(favoriteOffers);
+
+  console.log(
+    chalk.green('✓ Offer removed from favorites! Saved to: ' + path + '\n')
+  );
 }
