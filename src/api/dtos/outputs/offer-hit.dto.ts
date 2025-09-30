@@ -4,8 +4,8 @@ export interface OfferHitDTO {
   publicationTimestamp: number;
 
   maison: string;
-  city: string;
-  country: string;
+  city?: string;
+  country?: string;
 
   function: string;
   salary: string | null;
