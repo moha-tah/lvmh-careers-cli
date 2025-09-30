@@ -6,6 +6,7 @@ import { Command } from 'commander';
 import {
   clearCommand,
   favOffersCommand,
+  favQueriesCommand,
   initCommand,
   searchCommand,
 } from './commands/index.js';
@@ -42,6 +43,7 @@ program
 program.addCommand(initCommand);
 program.addCommand(searchCommand);
 program.addCommand(favOffersCommand);
+program.addCommand(favQueriesCommand);
 program.addCommand(clearCommand);
 
 program.parse();

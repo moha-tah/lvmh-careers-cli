@@ -2,11 +2,14 @@ import { XMLParser } from 'fast-xml-parser';
 import { existsSync, readFileSync } from 'fs';
 
 import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
+import { SavedQueryDTO } from '../api/dtos/saved-query.dto.js';
 import { config } from '../config/index.js';
 import { getConfigDir } from './get-config-dir.js';
 import { FavoriteType } from './types.js';
 
-export function getFavoritesFromFile(type: FavoriteType): OfferHitDTO[] {
+export function getFavoritesFromFile(
+  type: FavoriteType
+): OfferHitDTO[] | SavedQueryDTO[] {
   const storageType = config.get('storageType');
   const filePath = getConfigDir() + `/favorite-${type}.` + storageType;
 

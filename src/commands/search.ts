@@ -60,13 +60,18 @@ export const searchCommand = new Command()
       }
 
       // For interactive mode, use remote pagination
+      const queryParams = {
+        query,
+        hitsPerPage,
+        page: 0,
+        facetFilters: [],
+      };
+
       await navigateRemoteOffers(async page => {
         const results = await lvmhApi.searchOffers({
           params: {
-            query,
-            hitsPerPage,
+            ...queryParams,
             page,
-            facetFilters: [],
           },
         });
 
@@ -74,7 +79,7 @@ export const searchCommand = new Command()
         const nbPages = results.results?.[0]?.nbPages || 0;
 
         return { hits, nbPages };
-      });
+      }, queryParams);
     } catch (error) {
       if (!error) {
         console.error(chalk.yellow('Interrupted. Goodbye!'));

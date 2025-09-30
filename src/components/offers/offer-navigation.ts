@@ -1,8 +1,9 @@
 import chalk from 'chalk';
 import enquirer from 'enquirer';
 
+import { OfferQueryDTO } from '../../api/dtos/inputs/offer-query.dto.js';
 import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
-import { getFavoritesFromFile } from '../../utils/get-favorites-from-file.js';
+import { getOffersFromFile } from '../../utils/offers-from-file.js';
 import { OfferSourceType } from '../../utils/types.js';
 import { displayOffers, displayResultsCount } from './display-offers.js';
 import { selectOfferOrNavigate } from './offer-selection.js';
@@ -14,7 +15,8 @@ type OfferProvider = (page: number) => Promise<{
 
 async function handleOfferNavigation(
   source: OfferSourceType,
-  provider: OfferProvider
+  provider: OfferProvider,
+  currentQueryParams?: OfferQueryDTO['params']
 ): Promise<void> {
   let page = 0;
   let continueNavigation = true;
@@ -32,7 +34,13 @@ async function handleOfferNavigation(
 
     console.log();
 
-    const selection = await selectOfferOrNavigate(hits, page, nbPages, source);
+    const selection = await selectOfferOrNavigate(
+      hits,
+      page,
+      nbPages,
+      source,
+      currentQueryParams
+    );
 
     if (selection.type === 'previous') {
       page--;
@@ -41,6 +49,9 @@ async function handleOfferNavigation(
     } else if (selection.type === 'quit') {
       console.log('\n' + chalk.green('✓ Goodbye!'));
       process.exit(0);
+    } else if (selection.type === 'save_query') {
+      // Continue browsing after saving query
+      continue;
     } else if (selection.type === 'offer') {
       const answer = await enquirer.prompt<{ toggle: boolean }>({
         type: 'toggle',
@@ -60,8 +71,8 @@ async function handleOfferNavigation(
 }
 
 export async function navigateLocalOffers(hitsPerPage: number): Promise<void> {
-  await handleOfferNavigation('fav', async page => {
-    const allHits = getFavoritesFromFile('offers');
+  await handleOfferNavigation('fav-offers', async page => {
+    const allHits = getOffersFromFile();
     const nbPages = Math.ceil(allHits.length / hitsPerPage) - 1;
 
     const startIndex = page * hitsPerPage;
@@ -73,7 +84,8 @@ export async function navigateLocalOffers(hitsPerPage: number): Promise<void> {
 }
 
 export async function navigateRemoteOffers(
-  provider: OfferProvider
+  provider: OfferProvider,
+  currentQueryParams?: OfferQueryDTO['params']
 ): Promise<void> {
-  await handleOfferNavigation('search', provider);
+  await handleOfferNavigation('search', provider, currentQueryParams);
 }

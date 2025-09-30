@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import { displayLogo } from '../components/logo.js';
 import { navigateLocalOffers } from '../components/offers/offer-navigation.js';
 import { config } from '../config/index.js';
-import { getFavoritesFromFile } from '../utils/get-favorites-from-file.js';
+import { getOffersFromFile } from '../utils/offers-from-file.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const favOffersCommand = new Command()
@@ -17,7 +17,7 @@ export const favOffersCommand = new Command()
     console.log('\n⭐ Your favorite offers...\n');
 
     try {
-      const favoriteOffers = getFavoritesFromFile('offers');
+      const favoriteOffers = getOffersFromFile();
       console.log(favoriteOffers);
 
       if (favoriteOffers.length === 0) {

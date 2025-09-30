@@ -12,7 +12,7 @@ export function displayOffer(
   console.log(
     prefix +
       chalk.white.bold(hit.name) +
-      (hit.isNew && source === 'search'
+      (hit.isNew && (source === 'search' || source === 'fav-queries')
         ? chalk.hex(PRIMARY_COLOR).bold(' (✨ New)')
         : '')
   );
