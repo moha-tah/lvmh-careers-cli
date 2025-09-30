@@ -1,11 +1,15 @@
-import chalk from 'chalk';
 import { Command } from 'commander';
 import enquirer from 'enquirer';
 
 import { LVMH } from '../api/LVMH.js';
 import { config } from '../config/index.js';
-import { PRIMARY_COLOR } from '../utils/constants.js';
+import {
+  displayOffers,
+  displayPageInfo,
+  displayResultsCount,
+} from '../utils/display-offers.js';
 import { displayLogo } from '../utils/logo.js';
+import { selectOfferOrNavigate } from '../utils/offer-selection.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const searchCommand = new Command()
@@ -40,52 +44,55 @@ export const searchCommand = new Command()
     }
 
     try {
-      const results = await lvmhApi.searchOffers({
-        params: {
-          query,
-          hitsPerPage: command.number || config.get('hitsPerPage'),
-          page,
-          facetFilters: [],
-        },
-      });
+      let continueNavigation = true;
 
-      const hits = results.results?.[0]?.hits || [];
-      const nbPages = results.results?.[0]?.nbPages || 0;
+      while (continueNavigation) {
+        const results = await lvmhApi.searchOffers({
+          params: {
+            query,
+            hitsPerPage: command.number || config.get('hitsPerPage'),
+            page,
+            facetFilters: [],
+          },
+        });
 
-      if (command.raw) {
-        console.log(JSON.stringify(hits, null, 2));
-        return;
-      }
+        const hits = results.results?.[0]?.hits || [];
+        const nbPages = results.results?.[0]?.nbPages || 0;
 
-      if (hits.length === 0) {
-        console.log('No results found.\n');
-        return;
-      }
+        if (command.raw) {
+          console.log(JSON.stringify(hits, null, 2));
+          return;
+        }
 
-      hits.forEach((hit, index) => {
-        console.log(
-          chalk.hex(PRIMARY_COLOR).bold(`${index + 1}. `) +
-            chalk.white.bold(hit.name)
-        );
-        console.log(chalk.gray('   🏢 Company: ') + chalk.cyan(hit.maison));
-        console.log(
-          chalk.gray('   📍 Location: ') +
-            chalk.green(`${hit.city ?? 'N/A'}, ${hit.country ?? 'N/A'}`)
-        );
-        console.log(
-          chalk.gray('   💼 Function: ') + chalk.magenta(hit.function)
-        );
-        console.log(
-          chalk.gray('   📄 Contract: ') + chalk.yellow(hit.contract)
-        );
+        if (hits.length === 0) {
+          console.log('No results found.\n');
+          return;
+        }
+
+        displayOffers(hits);
+        displayPageInfo(page, nbPages);
+        displayResultsCount(hits.length);
+
         console.log();
-      });
-      console.log(`📄 Page ${page + 1} of ${nbPages + 1}\n`);
-      console.log(
-        chalk
-          .hex(PRIMARY_COLOR)
-          .bold(`✨ Found ${hits.length} result${hits.length > 1 ? 's' : ''}`)
-      );
+
+        const selection = await selectOfferOrNavigate(hits, page, nbPages);
+
+        if (selection.type === 'previous') {
+          page--;
+        } else if (selection.type === 'next') {
+          page++;
+        } else if (selection.type === 'offer') {
+          const answer = await enquirer.prompt<{ yes: boolean }>({
+            type: 'confirm',
+            name: 'yes',
+            message: 'Do you want to search for another offer?',
+          });
+
+          if (!answer.yes) {
+            continueNavigation = false;
+          }
+        }
+      }
     } catch (error) {
       console.error('Error searching for offers:', error);
     }
