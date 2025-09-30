@@ -1,6 +1,6 @@
 # LVMH Careers CLI
 
-A simple CLI made with Commander and Ink to access and store offers from LVMH Careers platform.
+A simple CLI made with Node.js, TypeScript, Commander and Ink to access and store offers from LVMH Careers platform.
 
 You can:
 

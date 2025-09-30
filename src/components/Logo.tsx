@@ -1,29 +1,29 @@
 import React from 'react';
 import { Box, Text } from 'ink';
+import { PRIMARY_COLOR } from '../utils/constants.js';
 
 const Logo: React.FC = () => {
-  const color = '#ffd700';
   return (
     <Box flexDirection="column" alignItems="flex-start" paddingY={1}>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██         ░██    ░██ ░███     ░███ ░██     ░██
       </Text>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██         ░██    ░██ ░████   ░████ ░██     ░██
       </Text>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██         ░██    ░██ ░██░██ ░██░██ ░██     ░██
       </Text>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██         ░██    ░██ ░██ ░████ ░██ ░██████████
       </Text>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██          ░██  ░██  ░██  ░██  ░██ ░██     ░██
       </Text>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██           ░██░██   ░██       ░██ ░██     ░██
       </Text>
-      <Text bold color={color}>
+      <Text bold color={PRIMARY_COLOR}>
       ░██████████    ░███    ░██       ░██ ░██     ░██
       </Text>
       <Box marginTop={1}>
