@@ -3,7 +3,7 @@ import enquirer from 'enquirer';
 
 import { OfferQueryDTO } from '../../api/dtos/inputs/offer-query.dto.js';
 import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
-import { getOffersFromFile } from '../../utils/offers-from-file.js';
+import { getOffersFromFile } from '../../utils/functions/offers-from-file.js';
 import { OfferSourceType } from '../../utils/types.js';
 import { displayOffers, displayResultsCount } from './display-offers.js';
 import { selectOfferOrNavigate } from './offer-selection.js';

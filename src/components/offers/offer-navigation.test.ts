@@ -5,7 +5,7 @@ import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
 import { navigateLocalOffers } from './offer-navigation.js';
 
 // Mock modules
-jest.mock('../../utils/offers-from-file.js', () => ({
+jest.mock('../../utils/functions/offers-from-file.js', () => ({
   getOffersFromFile: jest.fn(),
 }));
 jest.mock('./display-offers.js', () => ({
@@ -19,7 +19,7 @@ jest.mock('enquirer');
 
 import enquirer from 'enquirer';
 
-import { getOffersFromFile } from '../../utils/offers-from-file.js';
+import { getOffersFromFile } from '../../utils/functions/offers-from-file.js';
 import { displayOffers, displayResultsCount } from './display-offers.js';
 import { selectOfferOrNavigate } from './offer-selection.js';
 

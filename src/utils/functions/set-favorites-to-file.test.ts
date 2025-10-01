@@ -1,12 +1,12 @@
 import { jest } from '@jest/globals';
 
-import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
-import { SavedQueryDTO } from '../api/dtos/saved-query.dto.js';
+import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
+import { SavedQueryDTO } from '../../api/dtos/saved-query.dto.js';
 import { setFavoritesToFile } from './set-favorites-to-file.js';
 
 // Mock modules
 jest.mock('fs');
-jest.mock('../config/index.js', () => ({
+jest.mock('../../config/index.js', () => ({
   config: {
     get: jest.fn(),
   },
@@ -17,7 +17,7 @@ jest.mock('./get-config-dir.js', () => ({
 
 import { writeFileSync } from 'fs';
 
-import { config } from '../config/index.js';
+import { config } from '../../config/index.js';
 
 const mockWriteFileSync = writeFileSync as jest.MockedFunction<
   typeof writeFileSync
