@@ -7,3 +7,5 @@ export type IndexName = `PRD-${Locale}-timestamp-desc`;
 export type OfferSourceType = 'search' | 'fav-offers' | 'fav-queries';
 
 export type FavoriteType = 'offers' | 'queries';
+
+export type FilterType = 'geographicAreaFilter' | 'requiredExperienceFilter';

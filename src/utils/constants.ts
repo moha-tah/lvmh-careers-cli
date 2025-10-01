@@ -19,3 +19,7 @@ export const AVAILABLE_STORAGE_TYPES = {
   xml: 'XML </>',
 };
 
+export const FILTERS_MAPPING = {
+  geographicAreaFilter: 'Geographic Area',
+  requiredExperienceFilter: 'Required Experience',
+};

@@ -47,6 +47,7 @@ describe('offer-navigation', () => {
     maison: 'Test Maison',
     city: 'Paris',
     country: 'France',
+    geographicArea: 'Europe',
     function: 'IT',
     salary: null,
     contract: 'CDI',

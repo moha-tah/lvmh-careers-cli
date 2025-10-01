@@ -6,6 +6,7 @@ export interface OfferHitDTO {
   maison: string;
   city?: string;
   country?: string;
+  geographicArea: string;
 
   function: string;
   salary: string | null;
