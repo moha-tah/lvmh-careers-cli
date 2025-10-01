@@ -6,10 +6,10 @@ import open from 'open';
 import { OfferQueryDTO } from '../../api/dtos/inputs/offer-query.dto.js';
 import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
 import { LVMH_OFFER_BASE_URL } from '../../utils/constants.js';
-import { getOffersFromFile } from '../../utils/offers-from-file.js';
-import { getQueriesFromFile } from '../../utils/queries-from-file.js';
-import { setQueriesToFile } from '../../utils/queries-from-file.js';
-import { setFavoritesToFile } from '../../utils/set-favorites-to-file.js';
+import { getOffersFromFile } from '../../utils/functions/offers-from-file.js';
+import { getQueriesFromFile } from '../../utils/functions/queries-from-file.js';
+import { setQueriesToFile } from '../../utils/functions/queries-from-file.js';
+import { setFavoritesToFile } from '../../utils/functions/set-favorites-to-file.js';
 import { OfferSourceType } from '../../utils/types.js';
 import { displayOffer } from './display-offers.js';
 

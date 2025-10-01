@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import { rmSync } from 'fs';
 
 import { config } from '../config/index.js';
-import { getConfigDir } from '../utils/get-config-dir.js';
+import { getConfigDir } from '../utils/functions/get-config-dir.js';
 
 export const clearCommand = new Command()
   .name('clear')

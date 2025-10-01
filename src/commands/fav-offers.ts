@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import { displayLogo } from '../components/logo.js';
 import { navigateLocalOffers } from '../components/offers/offer-navigation.js';
 import { config } from '../config/index.js';
-import { getOffersFromFile } from '../utils/offers-from-file.js';
+import { getOffersFromFile } from '../utils/functions/offers-from-file.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const favOffersCommand = new Command()

@@ -8,7 +8,7 @@ import { navigateRemoteOffers } from '../components/offers/offer-navigation.js';
 import { QUIT_VALUE } from '../components/offers/offer-selection.js';
 import { config } from '../config/index.js';
 import { CLI_NAME, PRIMARY_COLOR } from '../utils/constants.js';
-import { getQueriesFromFile } from '../utils/queries-from-file.js';
+import { getQueriesFromFile } from '../utils/functions/queries-from-file.js';
 import { ensureConfigIsValid } from './init.js';
 
 export const favQueriesCommand = new Command()

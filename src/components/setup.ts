@@ -7,7 +7,7 @@ import {
   AVAILABLE_LOCALES,
   AVAILABLE_STORAGE_TYPES,
 } from '../utils/constants.js';
-import { getConfigDir } from '../utils/get-config-dir.js';
+import { getConfigDir } from '../utils/functions/get-config-dir.js';
 import { displayLogo } from './logo.js';
 
 export async function runSetup(): Promise<void> {

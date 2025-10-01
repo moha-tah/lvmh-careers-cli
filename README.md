@@ -353,7 +353,6 @@ Jobs:
 
 **Configuration requise :**
 
-- Secret GitHub : `npm_token` (token npm avec droits de publication)
 - Node.js 22.x
 
 **Étapes de publication :**

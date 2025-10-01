@@ -1,4 +1,4 @@
-import { OfferHitDTO } from '../api/dtos/outputs/offer-hit.dto.js';
+import { OfferHitDTO } from '../../api/dtos/outputs/offer-hit.dto.js';
 import { getFavoritesFromFile } from './get-favorites-from-file.js';
 import { setFavoritesToFile } from './set-favorites-to-file.js';
 
