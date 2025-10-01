@@ -1,102 +1,104 @@
 # LVMH Careers CLI
 
+**Documentation en français ici** → [README-FR.md](README-FR.md)
+
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.2-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green.svg)
 ![License](https://img.shields.io/badge/license-ISC-yellow.svg)
 
-Une interface en ligne de commande (CLI) pour rechercher et gérer les offres d'emploi de la plateforme LVMH Careers.
+A command-line interface (CLI) to search and manage job offers from the LVMH Careers platform.
 
 </div>
 
 ---
 
-## 📋 Table des matières
+## 📋 Table of Contents
 
-- [1. Présentation Fonctionnelle](#1-présentation-fonctionnelle)
-  - [1.1 Lancement rapide](#11-lancement-rapide)
-  - [1.2 Vue d'ensemble](#12-vue-densemble)
-  - [1.3 Fonctionnalités principales](#13-fonctionnalités-principales)
-  - [1.4 Commandes disponibles](#14-commandes-disponibles)
-- [2. Documentation Technique](#2-documentation-technique)
-  - [2.1 Prérequis](#21-prérequis)
+- [1. Functional Overview](#1-functional-overview)
+  - [1.1 Quick Start](#11-quick-start)
+  - [1.2 Overview](#12-overview)
+  - [1.3 Main Features](#13-main-features)
+  - [1.4 Available Commands](#14-available-commands)
+- [2. Technical Documentation](#2-technical-documentation)
+  - [2.1 Prerequisites](#21-prerequisites)
   - [2.2 Installation](#22-installation)
-  - [2.3 Architecture du projet](#23-architecture-du-projet)
-  - [2.4 Stack technique](#24-stack-technique)
-  - [2.5 Scripts disponibles](#25-scripts-disponibles)
+  - [2.3 Project Architecture](#23-project-architecture)
+  - [2.4 Technical Stack](#24-technical-stack)
+  - [2.5 Available Scripts](#25-available-scripts)
   - [2.6 Configuration](#26-configuration)
   - [2.7 CI/CD](#27-cicd)
 
 ---
 
-## 1. Présentation Fonctionnelle
+## 1. Functional Overview
 
-### 1.1 Lancement rapide
+### 1.1 Quick Start
 
-Installez le CLI globalement :
+Install the CLI globally:
 
 ```bash
 npm install -g lvmh-careers-cli
 ```
 
-Puis lancez la commande suivante :
+Then run the following command:
 
 ```bash
 lvmh-careers search
 ```
 
-### 1.2 Vue d'ensemble
+### 1.2 Overview
 
-LVMH Careers CLI est un outil en ligne de commande permettant d'explorer les opportunités de carrière du groupe LVMH directement depuis votre terminal. L'application offre une interface interactive et intuitive pour rechercher, consulter et sauvegarder vos offres d'emploi favorites.
+LVMH Careers CLI is a command-line tool that allows you to explore career opportunities within the LVMH group directly from your terminal. The application provides an interactive and intuitive interface to search, view, and save your favorite job offers.
 
-### 1.3 Fonctionnalités principales
+### 1.3 Main Features
 
-#### 🔍 Recherche d'offres
+#### 🔍 Job Search
 
-- Recherche par mots-clés dans les offres d'emploi LVMH
-- Navigation paginée des résultats
-- Affichage détaillé des offres (titre, société, localisation, contrat, date de publication)
-- Ouverture directe des offres dans le navigateur
-- Export des résultats en JSON
-- Copie des URL d'offres dans le presse-papiers
+- Search by keywords in LVMH job offers
+- Paginated navigation of results
+- Detailed display of offers (title, company, location, contract, publication date)
+- Direct opening of offers in the browser
+- Export of results in JSON format
+- Copy offer URLs to clipboard
 
-#### ⭐ Gestion des favoris
+#### ⭐ Favorites Management
 
-- Sauvegarde des offres favorites localement
-- Consultation des offres sauvegardées hors-ligne
-- Navigation dans vos offres favorites
-- Support de formats de stockage JSON et XML
+- Save favorite offers locally
+- View saved offers offline
+- Navigate through your favorite offers
+- Support for JSON and XML storage formats
 
-#### 💾 Requêtes sauvegardées
+#### 💾 Saved Queries
 
-- Enregistrement de vos recherches personnalisées
-- Exécution rapide de recherches récurrentes
-- Gestion de vos requêtes favorites
+- Save your custom searches
+- Quick execution of recurring searches
+- Manage your favorite queries
 
-#### 🌍 Support multilingue
+#### 🌍 Multilingual Support
 
-- Interface disponible en Français (fr-fr) et Anglais (en-us)
-- Recherche dans les offres selon la locale configurée
+- Interface available in French (fr-fr) and English (en-us)
+- Search in offers according to the configured locale
 
-#### ⚙️ Configuration personnalisable
+#### ⚙️ Customizable Configuration
 
-- Assistant de configuration interactive
-- Personnalisation du nombre de résultats par page
-- Choix du format de stockage (JSON/XML)
-- Reconfiguration à tout moment
+- Interactive configuration assistant
+- Customize the number of results per page
+- Choose storage format (JSON/XML)
+- Reconfigure at any time
 
-### 1.4 Commandes disponibles
+### 1.4 Available Commands
 
 #### `lvmh-careers init`
 
-Initialise ou reconfigure les paramètres du CLI.
+Initialize or reconfigure CLI settings.
 
-**Options configurables :**
+**Configurable options:**
 
-- Langue d'interface (fr-fr / en-us)
-- Nombre de résultats par page
-- Format de stockage des favoris (JSON / XML)
+- Interface language (fr-fr / en-us)
+- Number of results per page
+- Favorites storage format (JSON / XML)
 
 ```bash
 lvmh-careers init
@@ -104,69 +106,69 @@ lvmh-careers init
 
 #### `lvmh-careers search`
 
-Recherche des offres d'emploi sur la plateforme LVMH Careers.
+Search for job offers on the LVMH Careers platform.
 
-**Options :**
+**Options:**
 
-- `-q, --query <query>` : Terme de recherche
-- `-n, --number <number>` : Nombre de résultats par page
-- `-p, --page <page>` : Numéro de page
-- `-r, --raw` : Afficher les résultats en JSON brut
+- `-q, --query <query>` : Search term
+- `-n, --number <number>` : Number of results per page
+- `-p, --page <page>` : Page number
+- `-r, --raw` : Display results in raw JSON
 
-**Exemples :**
+**Examples:**
 
 ```bash
-# Recherche interactive
+# Interactive search
 lvmh-careers search
 
-# Recherche avec terme spécifique
-lvmh-careers search -q "développeur"
+# Search with specific term
+lvmh-careers search -q "developer"
 
-# Export JSON des résultats
+# Export JSON results
 lvmh-careers search -q "marketing" -n 20 -r
 ```
 
-**Actions disponibles lors de la navigation :**
+**Available actions during navigation:**
 
-- Consulter une offre en détail
-- Ouvrir l'offre dans le navigateur
-- Ajouter aux favoris
-- Copier l'URL
-- Sauvegarder la recherche
-- Navigation (page suivante/précédente)
+- View offer details
+- Open offer in browser
+- Add to favorites
+- Copy URL
+- Save search
+- Navigation (next/previous page)
 
 #### `lvmh-careers offers`
 
-Affiche et navigue dans vos offres favorites sauvegardées.
+Display and navigate through your saved favorite offers.
 
 ```bash
 lvmh-careers offers
 ```
 
-**Fonctionnalités :**
+**Features:**
 
-- Consultation hors-ligne des offres sauvegardées
-- Navigation paginée
-- Accès aux détails complets
-- Retrait des favoris
+- Offline viewing of saved offers
+- Paginated navigation
+- Access to complete details
+- Remove from favorites
 
 #### `lvmh-careers queries`
 
-Affiche et exécute vos requêtes de recherche sauvegardées.
+Display and execute your saved search queries.
 
 ```bash
 lvmh-careers queries
 ```
 
-**Fonctionnalités :**
+**Features:**
 
-- Liste de toutes vos recherches sauvegardées
-- Exécution immédiate d'une recherche favorite
-- Navigation interactive des résultats
+- List of all your saved searches
+- Immediate execution of a favorite search
+- Interactive navigation of results
 
 #### `lvmh-careers clear`
 
-Efface toutes les données locales (favoris et requêtes sauvegardées).
+Clear all local data (favorites and saved queries).
 
 ```bash
 lvmh-careers clear
@@ -174,159 +176,159 @@ lvmh-careers clear
 
 ---
 
-## 2. Documentation Technique
+## 2. Technical Documentation
 
-### 2.1 Prérequis
+### 2.1 Prerequisites
 
-- **Node.js** : Version 22.0.0 ou supérieure
-- **npm** : Installé avec Node.js
+- **Node.js**: Version 22.0.0 or higher
+- **npm**: Installed with Node.js
 
 ### 2.2 Installation
 
-#### Installation globale (recommandée)
+#### Global installation (recommended)
 
 ```bash
 npm install -g lvmh-careers-cli
 ```
 
-#### Installation depuis les sources
+#### Installation from source
 
 ```bash
-# Cloner le dépôt
-git clone <repository-url>
+# Clone the repository
+git clone https://github.com/moha-tah/lvmh-careers-cli
 cd lvmh-careers-cli
 
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Compiler le projet
+# Build the project
 npm run build
 
-# Lier globalement
+# Link globally
 npm link
 ```
 
-### 2.3 Architecture du projet
+### 2.3 Project Architecture
 
 ```
 lvmh-careers-cli/
 ├── src/
-│   ├── api/                    # Couche API
+│   ├── api/                    # API layer
 │   │   ├── dtos/              # Data Transfer Objects
-│   │   │   ├── inputs/        # DTOs d'entrée
-│   │   │   └── outputs/       # DTOs de sortie
-│   │   └── LVMH.ts            # Client API LVMH
-│   ├── commands/              # Commandes CLI
-│   │   ├── init.ts            # Initialisation/configuration
-│   │   ├── search.ts          # Recherche d'offres
-│   │   ├── fav-offers.ts      # Gestion des offres favorites
-│   │   ├── fav-queries.ts     # Gestion des requêtes favorites
-│   │   ├── clear.ts           # Nettoyage des données
-│   │   └── index.ts           # Export des commandes
-│   ├── components/            # Composants réutilisables
-│   │   ├── offers/            # Composants liés aux offres
-│   │   │   ├── display-offers.ts      # Affichage des offres
-│   │   │   ├── offer-navigation.ts    # Navigation paginée
-│   │   │   └── offer-selection.ts     # Sélection d'offres
-│   │   ├── base-command.ts    # Classe de base pour les commandes
-│   │   ├── logo.ts            # Affichage du logo
-│   │   └── setup.ts           # Assistant de configuration
+│   │   │   ├── inputs/        # Input DTOs
+│   │   │   └── outputs/       # Output DTOs
+│   │   └── LVMH.ts            # LVMH API client
+│   ├── commands/              # CLI commands
+│   │   ├── init.ts            # Initialization/configuration
+│   │   ├── search.ts          # Job search
+│   │   ├── fav-offers.ts      # Favorite offers management
+│   │   ├── fav-queries.ts     # Favorite queries management
+│   │   ├── clear.ts           # Data cleanup
+│   │   └── index.ts           # Commands export
+│   ├── components/            # Reusable components
+│   │   ├── offers/            # Offer-related components
+│   │   │   ├── display-offers.ts      # Offer display
+│   │   │   ├── offer-navigation.ts    # Paginated navigation
+│   │   │   └── offer-selection.ts     # Offer selection
+│   │   ├── base-command.ts    # Base class for commands
+│   │   ├── logo.ts            # Logo display
+│   │   └── setup.ts           # Configuration assistant
 │   ├── config/                # Configuration
-│   │   ├── index.ts           # Instance de configuration
-│   │   ├── schema.ts          # Schéma de configuration
+│   │   ├── index.ts           # Configuration instance
+│   │   ├── schema.ts          # Configuration schema
 │   │   └── is-config-valid.function.ts
-│   ├── utils/                 # Utilitaires
-│   │   ├── constants.ts       # Constantes globales
-│   │   ├── types.ts           # Types TypeScript
-│   │   ├── get-config-dir.ts  # Gestion du répertoire de config
+│   ├── utils/                 # Utilities
+│   │   ├── constants.ts       # Global constants
+│   │   ├── types.ts           # TypeScript types
+│   │   ├── get-config-dir.ts  # Config directory management
 │   │   ├── get-favorites-from-file.ts
 │   │   ├── set-favorites-to-file.ts
 │   │   ├── offers-from-file.ts
 │   │   └── queries-from-file.ts
-│   └── index.ts               # Point d'entrée principal
-├── dist/                      # Fichiers compilés (généré)
+│   └── index.ts               # Main entry point
+├── dist/                      # Compiled files (generated)
 ├── .github/
 │   └── workflows/
-│       └── npm_publish.yml    # Pipeline CI/CD
+│       └── npm_publish.yml    # CI/CD pipeline
 ├── package.json
 ├── tsconfig.json
 └── eslint.config.js
 ```
 
-### 2.4 Stack technique
+### 2.4 Technical Stack
 
-#### Dépendances principales
+#### Main dependencies
 
-| Package             | Version | Usage                                            |
-| ------------------- | ------- | ------------------------------------------------ |
-| **commander**       | ^14.0.1 | Framework CLI (gestion des commandes et options) |
-| **enquirer**        | ^2.4.1  | Prompts interactifs (menus, saisies)             |
-| **chalk**           | ^5.6.2  | Coloration du terminal                           |
-| **conf**            | ^15.0.0 | Gestion de la configuration persistante          |
-| **open**            | ^10.2.0 | Ouverture d'URLs dans le navigateur              |
-| **clipboardy**      | ^5.0.0  | Gestion du presse-papiers                        |
-| **fast-xml-parser** | ^5.2.5  | Parsing et génération XML                        |
-| **typescript**      | ^5.9.2  | Langage de développement                         |
+| Package             | Version | Usage                                         |
+| ------------------- | ------- | --------------------------------------------- |
+| **commander**       | ^14.0.1 | CLI framework (command and option management) |
+| **enquirer**        | ^2.4.1  | Interactive prompts (menus, inputs)           |
+| **chalk**           | ^5.6.2  | Terminal coloring                             |
+| **conf**            | ^15.0.0 | Persistent configuration management           |
+| **open**            | ^10.2.0 | Opening URLs in browser                       |
+| **clipboardy**      | ^5.0.0  | Clipboard management                          |
+| **fast-xml-parser** | ^5.2.5  | XML parsing and generation                    |
+| **typescript**      | ^5.9.2  | Development language                          |
 
-#### Dépendances de développement
+#### Development dependencies
 
-| Package                 | Version | Usage                                 |
-| ----------------------- | ------- | ------------------------------------- |
-| **tsx**                 | ^4.20.6 | Exécution TypeScript en développement |
-| **eslint**              | ^9.36.0 | Linting du code                       |
-| **@typescript-eslint/** | ^8.45.0 | Configuration ESLint pour TypeScript  |
-| **prettier**            | ^3.6.2  | Formatage du code                     |
-| **@types/node**         | ^24.6.0 | Types TypeScript pour Node.js         |
+| Package                 | Version | Usage                               |
+| ----------------------- | ------- | ----------------------------------- |
+| **tsx**                 | ^4.20.6 | TypeScript execution in development |
+| **eslint**              | ^9.36.0 | Code linting                        |
+| **@typescript-eslint/** | ^8.45.0 | ESLint configuration for TypeScript |
+| **prettier**            | ^3.6.2  | Code formatting                     |
+| **@types/node**         | ^24.6.0 | TypeScript types for Node.js        |
 
-### 2.5 Scripts disponibles
+### 2.5 Available Scripts
 
 ```bash
-# Développement
-npm run dev              # Lance le CLI en mode développement (tsx)
+# Development
+npm run dev              # Launch CLI in development mode (tsx)
 
 # Build
-npm run build            # Compile TypeScript vers dist/
+npm run build            # Compile TypeScript to dist/
 
-# Exécution
-npm start                # Lance le CLI compilé
+# Execution
+npm start                # Launch compiled CLI
 
-# Qualité de code
-npm run typecheck        # Vérification des types TypeScript
-npm run lint             # Linting avec ESLint
-npm run lint:fix         # Correction automatique des erreurs de lint
-npm run format           # Formatage avec Prettier
+# Code quality
+npm run typecheck        # TypeScript type checking
+npm run lint             # Linting with ESLint
+npm run lint:fix         # Automatic lint error correction
+npm run format           # Formatting with Prettier
 
 # Tests
-npm test                 # Pas encore implémenté
+npm test                 # Not yet implemented
 ```
 
 ### 2.6 Configuration
 
-#### Schéma de configuration
+#### Configuration schema
 
 ```typescript
 type ConfigSchema = {
-  locale: 'fr-fr' | 'en-us'; // Langue de l'interface
-  hitsPerPage: number; // Résultats par page (défaut: 5)
-  storageType: 'json' | 'xml'; // Format de stockage
-  favoriteOffers: OfferHitDTO[]; // (Géré par conf)
+  locale: 'fr-fr' | 'en-us'; // Interface language
+  hitsPerPage: number; // Results per page (default: 5)
+  storageType: 'json' | 'xml'; // Storage format
+  favoriteOffers: OfferHitDTO[]; // (Managed by conf)
 };
 ```
 
-#### Fichiers de configuration
+#### Configuration files
 
-La configuration est stockée via le package `conf` dans :
+Configuration is stored via the `conf` package in:
 
-- **macOS/Linux** : `~/.config/lvmh-careers-cli/`
-- **Windows** : `%APPDATA%\lvmh-careers-cli\`
+- **macOS/Linux**: `~/.config/lvmh-careers-cli/`
+- **Windows**: `%APPDATA%\lvmh-careers-cli\`
 
-**Fichiers générés :**
+**Generated files:**
 
-- `config.json` : Configuration principale
-- `favorite-offers.[json|xml]` : Offres favorites
-- `favorite-queries.[json|xml]` : Requêtes sauvegardées
+- `config.json`: Main configuration
+- `favorite-offers.[json|xml]`: Favorite offers
+- `favorite-queries.[json|xml]`: Saved queries
 
-#### API LVMH
+#### LVMH API
 
 ```typescript
 const LVMH_API_URL = 'https://www.lvmh.com/api/search';
@@ -338,29 +340,29 @@ const LVMH_OFFER_BASE_URL = 'https://www.lvmh.com/join-us/our-job-offers/';
 
 #### GitHub Actions Workflow
 
-Le projet utilise GitHub Actions pour automatiser la publication sur npm.
+The project uses GitHub Actions to automate npm publishing.
 
-**Pipeline** ([npm_publish.yml](.github/workflows/npm_publish.yml)) :
+**Pipeline** ([npm_publish.yml](.github/workflows/npm_publish.yml)):
 
 ```yaml
-Déclencheur: release créée
+Trigger: release created
 Jobs:
-  1. lint          # Vérification du code
-  2. typecheck     # Vérification des types
-  3. test          # Exécution des tests
-  4. publish-npm   # Publication sur npm (après validation)
+  1. lint          # Code verification
+  2. typecheck     # Type checking
+  3. test          # Test execution
+  4. publish-npm   # npm publishing (after validation)
 ```
 
-**Configuration requise :**
+**Required configuration:**
 
 - Node.js 22.x
 
-**Étapes de publication :**
+**Publishing steps:**
 
-1. Créer une nouvelle release sur GitHub
-2. Le workflow s'exécute automatiquement
+1. Create a new release on GitHub
+2. Workflow runs automatically
 3. Validation (lint + typecheck + test)
-4. Publication sur npm si tous les checks passent
+4. Publish to npm if all checks pass
 
 ---
 
@@ -368,6 +370,6 @@ Jobs:
 
 ISC
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
+Contributions are welcome! Feel free to open an issue or a pull request.

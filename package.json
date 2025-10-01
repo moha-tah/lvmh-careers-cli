@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "lvmh-careers-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple CLI made with Commander and Enquirer to access and store offers from LVMH Careers platform.",
   "type": "module",
   "main": "dist/index.js",

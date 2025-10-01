@@ -3,6 +3,7 @@ import { Command } from 'commander';
 import enquirer from 'enquirer';
 
 import { LVMH } from '../api/LVMH.js';
+import { askForFacets } from '../components/ask-for-facets.js';
 import { displayLogo } from '../components/logo.js';
 import { navigateRemoteOffers } from '../components/offers/offer-navigation.js';
 import { config } from '../config/index.js';
@@ -22,8 +23,8 @@ export const searchCommand = new Command()
 
     const locale = config.get('locale');
     const lvmhApi = new LVMH(locale);
-    let query = command.query;
 
+    let query = command.query;
     if (query === undefined) {
       query = (
         await enquirer.prompt<{ query: string }>({
@@ -33,6 +34,11 @@ export const searchCommand = new Command()
         })
       ).query;
     }
+
+    const facetFilters = await askForFacets(lvmhApi);
+    console.log({
+      facetFilters,
+    });
 
     if (!command.raw) {
       console.log('\n🔍 Searching for job offers...\n');
@@ -50,7 +56,7 @@ export const searchCommand = new Command()
               ? parseInt(command.number)
               : config.get('hitsPerPage'),
             page: command.page ? parseInt(command.page) : 0,
-            facetFilters: [],
+            facetFilters,
           },
         });
 
@@ -64,7 +70,7 @@ export const searchCommand = new Command()
         query,
         hitsPerPage,
         page: 0,
-        facetFilters: [],
+        facetFilters,
       };
 
       await navigateRemoteOffers(async page => {

@@ -22,7 +22,8 @@ export function getFavoritesFromFile(
 
   if (storageType === 'xml') {
     const parser = new XMLParser({
-      isArray: (tagName: string): boolean => tagName === 'data',
+      isArray: (tagName: string): boolean =>
+        tagName === 'data' || tagName === 'facetFilters',
     });
     return parser.parse(rawFavorite).data ?? [];
   } else {

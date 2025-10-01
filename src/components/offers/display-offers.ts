@@ -20,13 +20,20 @@ export function displayOffer(
   console.log(
     prefix +
       chalk.gray('📍 Location: ') +
-      chalk.green(`${hit.city ?? 'N/A'}, ${hit.country ?? 'N/A'}`)
+      chalk.green(
+        `${hit.city ?? ''} | ${hit.country ?? ''} | ${hit.geographicArea}`
+      )
   );
   console.log(
     prefix + chalk.gray('💼 Function: ') + chalk.magenta(hit.function)
   );
   console.log(
     prefix + chalk.gray('📄 Contract: ') + chalk.yellow(hit.contract)
+  );
+  console.log(
+    prefix +
+      chalk.gray('💼 Required Experience: ') +
+      chalk.yellow(hit.requiredExperience)
   );
 }
 

@@ -60,6 +60,8 @@ export const favQueriesCommand = new Command()
 
       const selectedQuery = queries.find(q => q.title === response.selection)!;
 
+      console.log(JSON.stringify(selectedQuery, null, 2));
+
       console.log('\n🔍 Executing query: ' + chalk.bold(selectedQuery.title));
       console.log();
 
