@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.2-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green.svg)
 ![License](https://img.shields.io/badge/license-ISC-yellow.svg)
 
