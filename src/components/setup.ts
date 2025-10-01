@@ -13,6 +13,8 @@ import { displayLogo } from './logo.js';
 export async function runSetup(): Promise<void> {
   displayLogo();
 
+  console.log(chalk.bgGrey('You need some configuration to use the CLI.\n'));
+
   const localeChoices = Object.entries(AVAILABLE_LOCALES).map(
     ([value, label]) => ({
       name: value,
@@ -20,10 +22,13 @@ export async function runSetup(): Promise<void> {
     })
   );
 
+  console.log(
+    'LVMH uses a search index for each language.\nSelect your preferred language to get the best results.'
+  );
   const localeResponse = await enquirer.prompt<{ locale: string }>({
     type: 'select',
     name: 'locale',
-    message: 'Select your search language:',
+    message: 'Your preferred language:',
     choices: localeChoices,
   });
 
