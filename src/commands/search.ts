@@ -14,6 +14,10 @@ export const searchCommand = new Command()
   .description('Search for job offers on LVMH Careers')
   .option('-q, --query <query>', 'Query term')
   .option('-n, --number <number>', 'Number of results per page')
+  .option(
+    '-f, --filters <filters>',
+    'Raw search filters in format "[[\\"filter_1:filter_1_value\\"], [\\"filter_2:filter_2_value\\"]]"'
+  )
   .option('-p, --page <page>', 'Page number')
   .option('-r, --raw', 'Raw offers in a JSON array', false)
   .action(async command => {
@@ -35,7 +39,10 @@ export const searchCommand = new Command()
       ).query;
     }
 
-    const facetFilters = await askForFacets(lvmhApi);
+    const facetFilters = command.filters
+      ? JSON.parse(command.filters)
+      : await askForFacets(lvmhApi);
+
     console.log({
       facetFilters,
     });
