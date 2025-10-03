@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.2-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green.svg)
 ![License](https://img.shields.io/badge/license-ISC-yellow.svg)
 [![npm version](https://img.shields.io/npm/v/lvmh-careers-cli.svg?logo=npm)](https://www.npmjs.com/package/lvmh-careers-cli)
