@@ -1,5 +1,7 @@
 # LVMH Careers CLI
 
+**Documentation Confluence ici** → [Confluence Docs](https://mohamedtahiri.atlassian.net/wiki/external/MGFlN2M1OWJjMGI4NGJmMDgxYmNlMjMxODM0NWEwNTQ)
+
 **English documentation here** → [README.md](README.md)
 
 <div align="center">
