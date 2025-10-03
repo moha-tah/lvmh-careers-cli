@@ -18,7 +18,6 @@ export const favOffersCommand = new Command()
 
     try {
       const favoriteOffers = getOffersFromFile();
-      console.log(favoriteOffers);
 
       if (favoriteOffers.length === 0) {
         console.log('You have no favorite offers yet.\n');

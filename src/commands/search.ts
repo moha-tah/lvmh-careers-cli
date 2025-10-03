@@ -43,10 +43,6 @@ export const searchCommand = new Command()
       ? JSON.parse(command.filters)
       : await askForFacets(lvmhApi);
 
-    console.log({
-      facetFilters,
-    });
-
     if (!command.raw) {
       console.log('\n🔍 Searching for job offers...\n');
     }
